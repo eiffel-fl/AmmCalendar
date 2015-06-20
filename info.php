@@ -34,7 +34,7 @@
             $u_month = $_POST['month'];
 
             $u_year = $_POST['year'];
-            
+
             echo '<h2>' . Month::$months[$u_month - 1] . '</h2>';
             ?>
             <thead>
@@ -53,14 +53,20 @@
 
                     foreach ($month->dates as $d => $w) {
                         if ($d == 1) {
-                            for ($i = 1; $i < $w; $i++) {
-                                echo '<td></td>';
-                            }
+                            $space = $w - $d;
+                            echo '<td colspan="' . $space . '"></td>';
                         }
+                        
                         echo '<td>' . $d . '</td>';
+                        
                         if ($w == 7) {
                             echo '</tr><tr>';
                         }
+                    }
+                    
+                    if($w != 7){
+                        $space = 7 - $w;
+                        echo '<td colspan="' . $space . '"></td>';
                     }
                     ?>
                 </tr>
